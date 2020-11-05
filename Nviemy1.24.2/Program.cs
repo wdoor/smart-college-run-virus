@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using System.Windows.Forms;
 using API;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Linq;
 
 namespace GloryHole
 {
@@ -83,18 +85,32 @@ namespace GloryHole
 
 
 
-        static string getScreenShot()
+        static MemoryStream getScreenShot()
         {
+
             string id = Environment.MachineName;
             var ms = new MemoryStream();
             Graphics graph = null;
-            var bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             graph = Graphics.FromImage(bmp);
             graph.CopyFromScreen(0, 0, 0, 0, bmp.Size);
-            bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            bmp = ResizeBitmap(bmp, 1600, 900);
+            bmp.Save(ms, ImageFormat.Jpeg);
             string base64 = Convert.ToBase64String(ms.GetBuffer());//это комментарий
-            Console.WriteLine(id);
-            return (base64);
+            return (ms);
+
         }
+
+        public static Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
+        {
+            Bitmap result = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.DrawImage(bmp, 0, 0, width, height);
+            }
+
+            return result;
+        }
+
     }
 }
