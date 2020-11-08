@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4367E349-C24F-422B-B0DE-97D8A3A76992}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>GloryHole</RootNamespace>
     <AssemblyName>GloryHole</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
