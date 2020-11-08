@@ -95,12 +95,12 @@ namespace API
     /// <summary>
     /// Команда, НЕ БЕРИ ПЕРЕМЕННЫЕ, ели ты не уверен, что они присутсвуют в статусе
     /// </summary>
-    public interface Command
+    public class Command
     {
-        CommandTypes type { get; }
-        int x { get; }
-        int y { get; }
-        string text { get; }
+        public int type { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public string text { get; set; }
     }
 
     /// <summary>
@@ -113,6 +113,7 @@ namespace API
         SwapScreen = 2,
         WriteText = 3,
         BSOD = 4,
+        MessageBox = 5,
     }
 }
 
